@@ -6,6 +6,7 @@ import (
 	"os"
 	"runtime"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/fumiama/SocketMirror/client"
@@ -24,7 +25,7 @@ func main() {
 	n := flag.String("n", "tcp", "network")
 	addr := flag.String("a", "127.0.0.1:8888", "server addr")
 	s := flag.Bool("s", false, "server mode")
-	c := flag.Bool("c", false, "client mode")
+	c := flag.Uint("c", 0, "client count")
 	l := flag.Uint("l", 1024, "batch size (length per write)")
 	r := flag.Uint("r", 1024, "batch count (repeat times)")
 	t := flag.Uint("t", 4, "connect timeout (s)")
@@ -35,7 +36,7 @@ func main() {
 		flag.PrintDefaults()
 		os.Exit(0)
 	}
-	if !*s && !*c {
+	if !*s && *c == 0 {
 		fmt.Println("ERROR: -s and -c can not be disabled both")
 		os.Exit(line())
 	}
@@ -67,29 +68,37 @@ func main() {
 			}
 		}()
 	}
-	if *c {
-		bm := client.NewBeamer(*addr)
-		err := bm.Connect(*n, time.Second*time.Duration(*t))
-		if err != nil {
-			fmt.Println("ERROR:", err)
-			os.Exit(line())
+	if *c > 0 {
+		wg := sync.WaitGroup{}
+		wg.Add(int(*c))
+		for i := 0; i < int(*c); i++ {
+			go func(i int) {
+				bm := client.NewBeamer(*addr)
+				err := bm.Connect(*n, time.Second*time.Duration(*t))
+				if err != nil {
+					fmt.Println("ERROR:", err)
+					os.Exit(line())
+				}
+				hash, ch := bm.Beam(int(*l), int(*r))
+				go func() {
+					for err := range ch {
+						fmt.Println("ERROR:", err)
+					}
+				}()
+				fmt.Println("checking...")
+				t0 := time.Now().UnixMilli()
+				cnt, err := bm.See(int(*l), int(*r), hash)
+				if err != nil {
+					fmt.Println("ERROR:", err)
+				}
+				t1 := time.Now().UnixMilli()
+				totl := *l * *r
+				delta := t1 - t0
+				fmt.Println("client", i, "send", totl, "bytes in", delta, "ms, speed:", float64(totl)/float64(delta)/1000, "bytes/s")
+				fmt.Println("client", i, "total:", *l, "batches", "success:", cnt, "batches")
+				wg.Done()
+			}(i + 1)
 		}
-		hash, ch := bm.Beam(int(*l), int(*r))
-		go func() {
-			for err := range ch {
-				fmt.Println("ERROR:", err)
-			}
-		}()
-		fmt.Println("checking...")
-		t0 := time.Now().UnixMilli()
-		cnt, err := bm.See(int(*l), int(*r), hash)
-		if err != nil {
-			fmt.Println("ERROR:", err)
-		}
-		t1 := time.Now().UnixMilli()
-		totl := *l * *r
-		delta := t1 - t0
-		fmt.Println("send", totl, "bytes in", delta, "ms, speed:", float64(totl)/float64(delta)/1000, "bytes/s")
-		fmt.Println("total:", *l, "batches", "success:", cnt, "batches")
+		wg.Wait()
 	}
 }
