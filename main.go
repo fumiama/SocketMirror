@@ -87,7 +87,6 @@ func main() {
 						fmt.Println("ERROR:", err)
 					}
 				}()
-				fmt.Println("checking...")
 				t0 := time.Now().UnixMilli()
 				cnt, err := bm.See(int(*l), int(*r), hash)
 				if err != nil {
@@ -96,8 +95,7 @@ func main() {
 				t1 := time.Now().UnixMilli()
 				totl := *l * *r
 				delta := t1 - t0
-				fmt.Println("client", i, "send", totl, "bytes in", delta, "ms, speed:", float64(totl)/float64(delta)/1000, "bytes/s")
-				fmt.Println("client", i, "total:", *l, "batches", "success:", cnt, "batches")
+				fmt.Printf("%04d -> %d/%d succ/totl, speed: %0.2f B/s\n", i, cnt, *l, float64(totl)/float64(delta)/1000)
 				wg.Done()
 			}(i + 1)
 		}
