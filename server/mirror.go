@@ -43,12 +43,15 @@ func (mr *Mirror) Reflect(buf []byte) <-chan error {
 				go func() {
 					defer wg.Done()
 					for {
-						_, err := conn.Read(buf)
+						n, err := conn.Read(buf)
 						if err != nil {
 							ch <- err
 							return
 						}
-						conn.Write(buf)
+						_, err = conn.Write(buf[:n])
+						if err != nil {
+							ch <- err
+						}
 					}
 				}()
 			}
@@ -67,12 +70,15 @@ func (mr *Mirror) Reflect(buf []byte) <-chan error {
 			return
 		}
 		for {
-			_, addr, err := conn.ReadFrom(buf)
+			n, addr, err := conn.ReadFrom(buf)
 			if err != nil {
 				ch <- err
 				return
 			}
-			conn.WriteTo(buf, addr)
+			_, err = conn.WriteTo(buf[:n], addr)
+			if err != nil {
+				ch <- err
+			}
 		}
 	}()
 	return ch

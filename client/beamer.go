@@ -43,14 +43,20 @@ func (bm *Beamer) Beam(batchsize, batchcount int) (uint64, <-chan error, <-chan 
 		defer close(ch)
 		defer close(msg)
 		for batchcount > 0 {
+			var err error
+			cnt := 0
+			n := 0
 			t0 := time.Now().UnixNano()
-			_, err := bm.conn.Write(data)
+			for cnt < batchsize {
+				n, err = bm.conn.Write(data[cnt:])
+				if err != nil {
+					ch <- err
+					return
+				}
+				cnt += n
+			}
 			t1 := time.Now().UnixNano()
 			msg <- t1 - t0
-			if err != nil {
-				ch <- err
-				return
-			}
 			batchcount--
 		}
 	}()
