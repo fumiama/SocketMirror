@@ -23,8 +23,8 @@ func TestTcp(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	hash, bmerrch := bm.Beam(1024, 1024)
-	sc, err := bm.See(1024, 1024, hash)
+	hash, bmerrch, _ := bm.Beam(1024, 1024)
+	sc, _, _, _, err := bm.See(1024, 1024, hash)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -50,8 +50,8 @@ func TestUdp(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	hash, bmerrch := bm.Beam(1024, 1024)
-	sc, err := bm.See(1024, 1024, hash)
+	hash, bmerrch, _ := bm.Beam(1024, 1024)
+	sc, _, _, _, err := bm.See(1024, 1024, hash)
 	if err != nil {
 		t.Fatal(err)
 	}

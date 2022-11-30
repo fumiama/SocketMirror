@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"math"
 	"math/rand"
 	"os"
 	"runtime"
@@ -54,6 +55,7 @@ func main() {
 		os.Exit(line())
 	}
 	rand.Seed(time.Now().UnixNano())
+	wg := sync.WaitGroup{}
 	if *s {
 		mr := server.NewMirror(*addr)
 		if strings.Contains(*n, "tcp") {
@@ -63,15 +65,16 @@ func main() {
 				os.Exit(line())
 			}
 		}
+		wg.Add(1)
 		ch := mr.Reflect(make([]byte, *l))
 		go func() {
 			for err := range ch {
 				fmt.Println("ERROR:", err)
 			}
+			wg.Done()
 		}()
 	}
 	if *c > 0 {
-		wg := sync.WaitGroup{}
 		wg.Add(int(*c))
 		for i := 0; i < int(*c); i++ {
 			go func(i int) {
@@ -81,17 +84,33 @@ func main() {
 					fmt.Println("ERROR:", err)
 					os.Exit(line())
 				}
-				hash, ch := bm.Beam(int(*l), int(*r))
+				hash, ch, msg := bm.Beam(int(*l), int(*r))
 				go func() {
 					for err := range ch {
 						fmt.Println("ERROR:", err)
 					}
 				}()
+				go func() {
+					max := int64(0)
+					min := int64(math.MaxInt64)
+					sum := int64(0)
+					for d := range msg {
+						if d > max {
+							max = d
+						}
+						if d < min {
+							min = d
+						}
+						sum += d
+					}
+					fmt.Printf("%04d -> beam max: %dns, min: %dns, avg: %dns\n", i, max, min, sum/int64(*l))
+				}()
 				t0 := time.Now().UnixMilli()
-				cnt, err := bm.See(int(*l), int(*r), hash)
+				cnt, max, min, sum, err := bm.See(int(*l), int(*r), hash)
 				if err != nil {
 					fmt.Println("ERROR:", err)
 				}
+				fmt.Printf("%04d -> see max: %dns, min: %dns, avg: %dns\n", i, max, min, sum/int64(*l))
 				t1 := time.Now().UnixMilli()
 				totl := *l * *r
 				delta := t1 - t0
@@ -99,6 +118,6 @@ func main() {
 				wg.Done()
 			}(i + 1)
 		}
-		wg.Wait()
 	}
+	wg.Wait()
 }
