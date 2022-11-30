@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"math/rand"
 	"os"
 	"runtime"
 	"strings"
@@ -52,6 +53,7 @@ func main() {
 		fmt.Println("ERROR: zero batch count")
 		os.Exit(line())
 	}
+	rand.Seed(time.Now().UnixNano())
 	if *s {
 		mr := server.NewMirror(*addr)
 		if strings.Contains(*n, "tcp") {
