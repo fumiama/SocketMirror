@@ -27,7 +27,7 @@ func (mr *Mirror) Listen(network string) (err error) {
 }
 
 // Reflect all data from peer
-func (mr *Mirror) Reflect(buf []byte) <-chan error {
+func (mr *Mirror) Reflect(bufsz int) <-chan error {
 	ch := make(chan error, 2)
 	if mr.lsnr != nil { // tcp
 		go func() {
@@ -41,6 +41,7 @@ func (mr *Mirror) Reflect(buf []byte) <-chan error {
 				wg.Add(1)
 				mr.conn = append(mr.conn, conn)
 				go func() {
+					buf := make([]byte, bufsz)
 					defer wg.Done()
 					for {
 						n, err := conn.Read(buf)
@@ -69,6 +70,7 @@ func (mr *Mirror) Reflect(buf []byte) <-chan error {
 			ch <- err
 			return
 		}
+		buf := make([]byte, bufsz)
 		for {
 			n, addr, err := conn.ReadFrom(buf)
 			if err != nil {

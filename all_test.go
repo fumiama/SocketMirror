@@ -17,7 +17,7 @@ func TestTcp(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	mrerrch := mr.Reflect(make([]byte, 1024))
+	mrerrch := mr.Reflect(1024)
 	bm := client.NewBeamer("127.0.0.1:45242")
 	err = bm.Connect("tcp", time.Second)
 	if err != nil {
@@ -44,7 +44,7 @@ func TestTcp(t *testing.T) {
 
 func TestUdp(t *testing.T) {
 	mr := server.NewMirror("127.0.0.1:45242")
-	mrerrch := mr.Reflect(make([]byte, 1024))
+	mrerrch := mr.Reflect(1024)
 	bm := client.NewBeamer("127.0.0.1:45242")
 	err := bm.Connect("udp", time.Second)
 	if err != nil {

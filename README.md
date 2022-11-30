@@ -23,240 +23,258 @@ Send random bytes to remote port and/or reflect all data to sender
 ### 1 client
 ```bash
 $ go run main.go -c 1 -s 
-0001 -> beam max: 33000ns, min: 1000ns, avg: 5098ns
-0001 -> see max: 88000ns, min: 1000ns, avg: 6464ns
-0001 -> 1024/1024 succ/totl, speed: 131.07 B/s
+0001 -> beam max: 86000ns, min: 1000ns, avg: 5469ns
+0001 -> see max: 90000ns, min: 1000ns, avg: 7172ns
+0001 -> 1024/1024 succ/totl, speed: 116.51 B/s
 ^Csignal: interrupt
 ```
-### 10 clients
+### 16 clients
 ```bash
-$ go run main.go -c 10 -s 
-0006 -> beam max: 2684000ns, min: 1000ns, avg: 24568ns
-0009 -> beam max: 5195000ns, min: 1000ns, avg: 24863ns
-0005 -> beam max: 5349000ns, min: 1000ns, avg: 25237ns
-0008 -> beam max: 5980000ns, min: 1000ns, avg: 25811ns
-0004 -> beam max: 6049000ns, min: 1000ns, avg: 30324ns
-0007 -> beam max: 10628000ns, min: 1000ns, avg: 35058ns
-0003 -> beam max: 11998000ns, min: 1000ns, avg: 42560ns
-0002 -> beam max: 12519000ns, min: 1000ns, avg: 43179ns
-0010 -> beam max: 12603000ns, min: 1000ns, avg: 43410ns
-0004 -> see max: 6528000ns, min: 1000ns, avg: 51128ns
-0004 -> 529/1024 succ/totl, speed: 19.42 B/s
-0009 -> see max: 9102000ns, min: 1000ns, avg: 51369ns
-0009 -> 552/1024 succ/totl, speed: 19.42 B/s
-0006 -> see max: 5403000ns, min: 1000ns, avg: 51821ns
-0006 -> 372/1024 succ/totl, speed: 19.07 B/s
-0007 -> see max: 10369000ns, min: 1000ns, avg: 52113ns
-0007 -> 557/1024 succ/totl, speed: 19.07 B/s
-0005 -> see max: 8730000ns, min: 1000ns, avg: 54338ns
-0005 -> 444/1024 succ/totl, speed: 18.40 B/s
-0008 -> see max: 9091000ns, min: 1000ns, avg: 54355ns
-0008 -> 545/1024 succ/totl, speed: 18.40 B/s
-0003 -> see max: 11895000ns, min: 1000ns, avg: 57611ns
-0003 -> 345/1024 succ/totl, speed: 17.19 B/s
-0002 -> see max: 13106000ns, min: 1000ns, avg: 56289ns
-0002 -> 287/1024 succ/totl, speed: 17.77 B/s
-0010 -> see max: 12634000ns, min: 1000ns, avg: 56375ns
-0010 -> 326/1024 succ/totl, speed: 17.77 B/s
-0001 -> beam max: 23363000ns, min: 1000ns, avg: 59882ns
-0001 -> see max: 15255000ns, min: 1000ns, avg: 60074ns
-0001 -> 644/1024 succ/totl, speed: 16.64 B/s
+$ go run main.go -c 16 -s 
+0004 -> beam max: 4582000ns, min: 1000ns, avg: 32251ns
+0016 -> beam max: 5748000ns, min: 1000ns, avg: 32756ns
+0003 -> beam max: 5881000ns, min: 1000ns, avg: 33494ns
+0001 -> beam max: 4756000ns, min: 1000ns, avg: 34694ns
+0014 -> beam max: 9422000ns, min: 1000ns, avg: 35479ns
+0013 -> beam max: 9297000ns, min: 1000ns, avg: 36012ns
+0015 -> beam max: 9427000ns, min: 1000ns, avg: 41104ns
+0008 -> beam max: 14104000ns, min: 1000ns, avg: 41536ns
+0009 -> beam max: 15841000ns, min: 1000ns, avg: 44399ns
+0010 -> beam max: 13835000ns, min: 1000ns, avg: 46892ns
+0011 -> beam max: 16868000ns, min: 1000ns, avg: 50151ns
+0002 -> beam max: 17085000ns, min: 1000ns, avg: 51875ns
+0005 -> beam max: 19507000ns, min: 1000ns, avg: 53383ns
+0007 -> beam max: 21144000ns, min: 1000ns, avg: 55142ns
+0003 -> see max: 17535000ns, min: 1000ns, avg: 61166ns
+0003 -> 1024/1024 succ/totl, speed: 16.13 B/s
+0016 -> see max: 14135000ns, min: 1000ns, avg: 66660ns
+0016 -> 1024/1024 succ/totl, speed: 14.98 B/s
+0001 -> see max: 13176000ns, min: 1000ns, avg: 66979ns
+0001 -> 1024/1024 succ/totl, speed: 15.20 B/s
+0006 -> beam max: 25635000ns, min: 1000ns, avg: 63666ns
+0004 -> see max: 25146000ns, min: 1000ns, avg: 69759ns
+0004 -> 1024/1024 succ/totl, speed: 14.36 B/s
+0014 -> see max: 19035000ns, min: 1000ns, avg: 69695ns
+0014 -> 1024/1024 succ/totl, speed: 14.36 B/s
+0012 -> beam max: 17105000ns, min: 1000ns, avg: 63831ns
+0013 -> see max: 14578000ns, min: 1000ns, avg: 72697ns
+0013 -> 1024/1024 succ/totl, speed: 13.80 B/s
+0015 -> see max: 14275000ns, min: 1000ns, avg: 73273ns
+0015 -> 1024/1024 succ/totl, speed: 13.80 B/s
+0009 -> see max: 20082000ns, min: 1000ns, avg: 76013ns
+0009 -> 1024/1024 succ/totl, speed: 13.27 B/s
+0010 -> see max: 15873000ns, min: 1000ns, avg: 78343ns
+0010 -> 1024/1024 succ/totl, speed: 12.95 B/s
+0011 -> see max: 19372000ns, min: 1000ns, avg: 78923ns
+0011 -> 1024/1024 succ/totl, speed: 12.79 B/s
+0002 -> see max: 18028000ns, min: 1000ns, avg: 85634ns
+0002 -> 1024/1024 succ/totl, speed: 11.78 B/s
+0008 -> see max: 16114000ns, min: 1000ns, avg: 85208ns
+0008 -> 1024/1024 succ/totl, speed: 11.78 B/s
+0005 -> see max: 19133000ns, min: 1000ns, avg: 86073ns
+0005 -> 1024/1024 succ/totl, speed: 11.65 B/s
+0007 -> see max: 23741000ns, min: 1000ns, avg: 87685ns
+0007 -> 1024/1024 succ/totl, speed: 11.52 B/s
+0006 -> see max: 25351000ns, min: 1000ns, avg: 89275ns
+0006 -> 1024/1024 succ/totl, speed: 11.28 B/s
+0012 -> see max: 20051000ns, min: 1000ns, avg: 85754ns
+0012 -> 1024/1024 succ/totl, speed: 11.65 B/s
 ^Csignal: interrupt
 ```
 ### 64 clitens
 ```bash
 $ go run main.go -c 64 -s 
-0001 -> beam max: 14682000ns, min: 1000ns, avg: 86771ns
-0002 -> beam max: 36235000ns, min: 1000ns, avg: 132656ns
-0013 -> beam max: 41494000ns, min: 1000ns, avg: 135347ns
-0033 -> beam max: 30257000ns, min: 1000ns, avg: 140781ns
-0003 -> beam max: 77510000ns, min: 1000ns, avg: 166496ns
-0048 -> beam max: 56195000ns, min: 1000ns, avg: 172379ns
-0022 -> beam max: 45633000ns, min: 1000ns, avg: 172704ns
-0031 -> beam max: 49682000ns, min: 1000ns, avg: 174806ns
-0032 -> beam max: 63546000ns, min: 1000ns, avg: 179052ns
-0039 -> beam max: 57762000ns, min: 1000ns, avg: 181775ns
-0004 -> beam max: 58247000ns, min: 1000ns, avg: 183431ns
-0016 -> beam max: 57396000ns, min: 1000ns, avg: 315688ns
-0006 -> beam max: 87473000ns, min: 1000ns, avg: 317913ns
-0064 -> beam max: 77143000ns, min: 1000ns, avg: 318394ns
-0010 -> beam max: 76939000ns, min: 1000ns, avg: 318707ns
-0012 -> beam max: 80304000ns, min: 1000ns, avg: 319589ns
-0008 -> beam max: 80197000ns, min: 1000ns, avg: 321088ns
-0041 -> beam max: 52908000ns, min: 1000ns, avg: 323661ns
-0029 -> beam max: 81810000ns, min: 1000ns, avg: 328235ns
-0017 -> beam max: 46529000ns, min: 1000ns, avg: 328761ns
-0007 -> beam max: 82227000ns, min: 1000ns, avg: 328892ns
-0047 -> beam max: 83100000ns, min: 1000ns, avg: 329859ns
-0037 -> beam max: 42829000ns, min: 1000ns, avg: 332366ns
-0015 -> beam max: 70855000ns, min: 1000ns, avg: 332442ns
-0050 -> beam max: 84833000ns, min: 1000ns, avg: 341846ns
-0059 -> beam max: 76463000ns, min: 1000ns, avg: 341911ns
-0024 -> beam max: 47168000ns, min: 1000ns, avg: 352522ns
-0046 -> beam max: 80506000ns, min: 1000ns, avg: 352670ns
-0051 -> beam max: 56376000ns, min: 1000ns, avg: 362643ns
-0025 -> beam max: 61810000ns, min: 1000ns, avg: 366380ns
-0053 -> beam max: 60418000ns, min: 1000ns, avg: 374306ns
-0034 -> beam max: 77301000ns, min: 1000ns, avg: 375575ns
-0018 -> beam max: 69377000ns, min: 1000ns, avg: 374696ns
-0042 -> beam max: 70180000ns, min: 1000ns, avg: 376232ns
-0054 -> beam max: 69452000ns, min: 1000ns, avg: 377533ns
-0035 -> beam max: 71405000ns, min: 1000ns, avg: 381917ns
-0019 -> beam max: 73373000ns, min: 1000ns, avg: 383612ns
-0043 -> beam max: 77326000ns, min: 1000ns, avg: 388769ns
-0055 -> beam max: 69322000ns, min: 1000ns, avg: 386700ns
-0036 -> beam max: 70243000ns, min: 1000ns, avg: 389031ns
-0001 -> see max: 36888000ns, min: 1000ns, avg: 394669ns
-0001 -> 604/1024 succ/totl, speed: 2.58 B/s
-0044 -> beam max: 70005000ns, min: 1000ns, avg: 391901ns
-0057 -> beam max: 65013000ns, min: 1000ns, avg: 402239ns
-0058 -> beam max: 69858000ns, min: 1000ns, avg: 408994ns
-0052 -> beam max: 48483000ns, min: 1000ns, avg: 416834ns
-0005 -> beam max: 83511000ns, min: 1000ns, avg: 417119ns
-0002 -> see max: 39481000ns, min: 1000ns, avg: 422936ns
-0002 -> 636/1024 succ/totl, speed: 2.41 B/s
-0009 -> beam max: 74685000ns, min: 1000ns, avg: 418995ns
-0011 -> beam max: 84048000ns, min: 1000ns, avg: 420294ns
-0020 -> beam max: 84388000ns, min: 1000ns, avg: 420960ns
-0038 -> beam max: 80102000ns, min: 1000ns, avg: 421985ns
-0021 -> beam max: 85243000ns, min: 1000ns, avg: 422694ns
-0026 -> beam max: 64284000ns, min: 1000ns, avg: 425742ns
-0045 -> beam max: 60427000ns, min: 1000ns, avg: 426979ns
-0030 -> beam max: 82018000ns, min: 1000ns, avg: 429291ns
-0023 -> beam max: 83642000ns, min: 1000ns, avg: 433210ns
-0014 -> beam max: 85056000ns, min: 1000ns, avg: 435753ns
-0049 -> beam max: 85219000ns, min: 1000ns, avg: 436473ns
-0060 -> beam max: 85242000ns, min: 1000ns, avg: 439773ns
-0062 -> beam max: 87012000ns, min: 1000ns, avg: 445036ns
-0063 -> beam max: 87327000ns, min: 1000ns, avg: 445619ns
-0040 -> beam max: 55365000ns, min: 1000ns, avg: 455751ns
-0003 -> see max: 87218000ns, min: 1000ns, avg: 473833ns
-0003 -> 839/1024 succ/totl, speed: 2.15 B/s
-0048 -> see max: 83643000ns, min: 1000ns, avg: 482628ns
-0004 -> see max: 83410000ns, min: 1000ns, avg: 482599ns
-0048 -> 356/1024 succ/totl, speed: 2.12 B/s
-0004 -> 353/1024 succ/totl, speed: 2.12 B/s
-0056 -> beam max: 56760000ns, min: 1000ns, avg: 476085ns
-0027 -> beam max: 55356000ns, min: 1000ns, avg: 476758ns
-0013 -> see max: 85488000ns, min: 1000ns, avg: 488441ns
-0013 -> 615/1024 succ/totl, speed: 2.09 B/s
-0022 -> see max: 45107000ns, min: 1000ns, avg: 490085ns
-0022 -> 473/1024 succ/totl, speed: 2.08 B/s
-0033 -> see max: 85567000ns, min: 1000ns, avg: 490239ns
-0033 -> 407/1024 succ/totl, speed: 2.08 B/s
-0028 -> beam max: 83237000ns, min: 1000ns, avg: 493925ns
-0031 -> see max: 85056000ns, min: 1000ns, avg: 504903ns
-0031 -> 617/1024 succ/totl, speed: 2.02 B/s
-0039 -> see max: 87517000ns, min: 1000ns, avg: 508285ns
-0039 -> 569/1024 succ/totl, speed: 2.01 B/s
-0061 -> beam max: 85998000ns, min: 1000ns, avg: 499727ns
-0032 -> see max: 62893000ns, min: 1000ns, avg: 511575ns
-0032 -> 443/1024 succ/totl, speed: 2.00 B/s
-0024 -> see max: 47904000ns, min: 1000ns, avg: 519071ns
-0024 -> 611/1024 succ/totl, speed: 1.97 B/s
-0043 -> see max: 76069000ns, min: 1000ns, avg: 518501ns
-0043 -> 566/1024 succ/totl, speed: 1.97 B/s
-0016 -> see max: 49891000ns, min: 1000ns, avg: 519596ns
-0016 -> 402/1024 succ/totl, speed: 1.97 B/s
-0034 -> see max: 72407000ns, min: 1000ns, avg: 519303ns
-0034 -> 651/1024 succ/totl, speed: 1.96 B/s
-0025 -> see max: 60259000ns, min: 1000ns, avg: 520085ns
-0025 -> 552/1024 succ/totl, speed: 1.96 B/s
-0051 -> see max: 55583000ns, min: 1000ns, avg: 520442ns
-0051 -> 575/1024 succ/totl, speed: 1.96 B/s
-0036 -> see max: 59156000ns, min: 1000ns, avg: 519112ns
-0036 -> 496/1024 succ/totl, speed: 1.97 B/s
-0044 -> see max: 66037000ns, min: 1000ns, avg: 519450ns
-0044 -> 494/1024 succ/totl, speed: 1.97 B/s
-0064 -> see max: 77121000ns, min: 1000ns, avg: 522657ns
-0064 -> 356/1024 succ/totl, speed: 1.95 B/s
-0010 -> see max: 76912000ns, min: 1000ns, avg: 522350ns
-0010 -> 325/1024 succ/totl, speed: 1.96 B/s
-0053 -> see max: 62914000ns, min: 1000ns, avg: 521995ns
-0053 -> 477/1024 succ/totl, speed: 1.96 B/s
-0006 -> see max: 84368000ns, min: 1000ns, avg: 523990ns
-0006 -> 699/1024 succ/totl, speed: 1.95 B/s
-0019 -> see max: 71605000ns, min: 1000ns, avg: 521715ns
-0019 -> 392/1024 succ/totl, speed: 1.96 B/s
-0012 -> see max: 80399000ns, min: 1000ns, avg: 524020ns
-0012 -> 447/1024 succ/totl, speed: 1.95 B/s
-0008 -> see max: 80544000ns, min: 2000ns, avg: 524100ns
-0008 -> 433/1024 succ/totl, speed: 1.95 B/s
-0035 -> see max: 64102000ns, min: 1000ns, avg: 522644ns
-0035 -> 683/1024 succ/totl, speed: 1.96 B/s
-0041 -> see max: 54117000ns, min: 1000ns, avg: 523514ns
-0041 -> 619/1024 succ/totl, speed: 1.95 B/s
-0057 -> see max: 64823000ns, min: 1000ns, avg: 519689ns
-0057 -> 615/1024 succ/totl, speed: 1.97 B/s
-0026 -> see max: 64250000ns, min: 1000ns, avg: 519698ns
-0026 -> 667/1024 succ/totl, speed: 1.97 B/s
-0029 -> see max: 81827000ns, min: 1000ns, avg: 527189ns
-0029 -> 422/1024 succ/totl, speed: 1.94 B/s
-0017 -> see max: 47105000ns, min: 1000ns, avg: 526092ns
-0017 -> 589/1024 succ/totl, speed: 1.94 B/s
-0054 -> see max: 56266000ns, min: 1000ns, avg: 525223ns
-0054 -> 533/1024 succ/totl, speed: 1.94 B/s
-0058 -> see max: 69916000ns, min: 1000ns, avg: 522414ns
-0058 -> 446/1024 succ/totl, speed: 1.95 B/s
-0037 -> see max: 45439000ns, min: 1000ns, avg: 528262ns
-0037 -> 510/1024 succ/totl, speed: 1.93 B/s
-0007 -> see max: 82259000ns, min: 1000ns, avg: 529420ns
-0042 -> see max: 52295000ns, min: 1000ns, avg: 528143ns
-0042 -> 504/1024 succ/totl, speed: 1.93 B/s
-0007 -> 385/1024 succ/totl, speed: 1.93 B/s
-0047 -> see max: 83137000ns, min: 1000ns, avg: 530704ns
-0047 -> 456/1024 succ/totl, speed: 1.92 B/s
-0055 -> see max: 54684000ns, min: 1000ns, avg: 528012ns
-0055 -> 609/1024 succ/totl, speed: 1.93 B/s
-0052 -> see max: 48410000ns, min: 1000ns, avg: 529167ns
-0052 -> 550/1024 succ/totl, speed: 1.93 B/s
-0005 -> see max: 83511000ns, min: 1000ns, avg: 530553ns
-0005 -> 293/1024 succ/totl, speed: 1.92 B/s
-0015 -> see max: 70116000ns, min: 1000ns, avg: 530387ns
-0015 -> 516/1024 succ/totl, speed: 1.92 B/s
-0059 -> see max: 76846000ns, min: 1000ns, avg: 525014ns
-0018 -> see max: 47011000ns, min: 1000ns, avg: 528425ns
-0018 -> 584/1024 succ/totl, speed: 1.93 B/s
-0059 -> 476/1024 succ/totl, speed: 1.95 B/s
-0009 -> see max: 74356000ns, min: 1000ns, avg: 530715ns
-0009 -> 423/1024 succ/totl, speed: 1.92 B/s
-0011 -> see max: 84015000ns, min: 1000ns, avg: 530647ns
-0011 -> 326/1024 succ/totl, speed: 1.93 B/s
-0040 -> see max: 55228000ns, min: 1000ns, avg: 529445ns
-0040 -> 657/1024 succ/totl, speed: 1.93 B/s
-0020 -> see max: 84448000ns, min: 1000ns, avg: 531613ns
-0020 -> 404/1024 succ/totl, speed: 1.92 B/s
-0038 -> see max: 79861000ns, min: 1000ns, avg: 531066ns
-0038 -> 574/1024 succ/totl, speed: 1.92 B/s
-0021 -> see max: 85131000ns, min: 1000ns, avg: 528377ns
-0021 -> 493/1024 succ/totl, speed: 1.93 B/s
-0050 -> see max: 84840000ns, min: 1000ns, avg: 531170ns
-0050 -> 450/1024 succ/totl, speed: 1.92 B/s
-0028 -> see max: 83213000ns, min: 1000ns, avg: 525645ns
-0028 -> 707/1024 succ/totl, speed: 1.94 B/s
-0030 -> see max: 82025000ns, min: 1000ns, avg: 529514ns
-0030 -> 634/1024 succ/totl, speed: 1.93 B/s
-0023 -> see max: 83595000ns, min: 1000ns, avg: 530341ns
-0023 -> 605/1024 succ/totl, speed: 1.92 B/s
-0014 -> see max: 85045000ns, min: 1000ns, avg: 532505ns
-0014 -> 550/1024 succ/totl, speed: 1.92 B/s
-0046 -> see max: 84948000ns, min: 1000ns, avg: 532416ns
-0046 -> 525/1024 succ/totl, speed: 1.92 B/s
-0049 -> see max: 85045000ns, min: 1000ns, avg: 533318ns
-0049 -> 686/1024 succ/totl, speed: 1.92 B/s
-0060 -> see max: 85824000ns, min: 1000ns, avg: 526000ns
-0060 -> 802/1024 succ/totl, speed: 1.94 B/s
-0062 -> see max: 88132000ns, min: 1000ns, avg: 526119ns
-0062 -> 791/1024 succ/totl, speed: 1.94 B/s
-0063 -> see max: 87569000ns, min: 1000ns, avg: 526227ns
-0063 -> 901/1024 succ/totl, speed: 1.94 B/s
-0056 -> see max: 101381000ns, min: 1000ns, avg: 618336ns
-0056 -> 537/1024 succ/totl, speed: 1.65 B/s
-0027 -> see max: 101204000ns, min: 1000ns, avg: 625924ns
-0027 -> 665/1024 succ/totl, speed: 1.63 B/s
-0061 -> see max: 96634000ns, min: 1000ns, avg: 624208ns
-0061 -> 890/1024 succ/totl, speed: 1.64 B/s
-0045 -> see max: 101304000ns, min: 1000ns, avg: 634986ns
-0045 -> 755/1024 succ/totl, speed: 1.61 B/s
+0003 -> beam max: 29667000ns, min: 1000ns, avg: 101896ns
+0064 -> beam max: 29414000ns, min: 1000ns, avg: 103788ns
+0011 -> beam max: 36490000ns, min: 1000ns, avg: 109123ns
+0004 -> beam max: 31938000ns, min: 1000ns, avg: 128744ns
+0041 -> beam max: 31709000ns, min: 1000ns, avg: 149914ns
+0019 -> beam max: 67266000ns, min: 1000ns, avg: 160933ns
+0049 -> beam max: 36366000ns, min: 1000ns, avg: 170791ns
+0051 -> beam max: 51872000ns, min: 1000ns, avg: 206817ns
+0006 -> beam max: 61938000ns, min: 2000ns, avg: 221349ns
+0044 -> beam max: 57328000ns, min: 1000ns, avg: 224810ns
+0043 -> beam max: 51882000ns, min: 1000ns, avg: 305575ns
+0034 -> beam max: 68411000ns, min: 1000ns, avg: 306165ns
+0024 -> beam max: 46890000ns, min: 1000ns, avg: 311359ns
+0007 -> beam max: 61936000ns, min: 1000ns, avg: 311817ns
+0054 -> beam max: 79796000ns, min: 1000ns, avg: 314366ns
+0033 -> beam max: 78811000ns, min: 1000ns, avg: 316100ns
+0046 -> beam max: 79195000ns, min: 1000ns, avg: 318456ns
+0037 -> beam max: 49029000ns, min: 1000ns, avg: 321234ns
+0023 -> beam max: 81903000ns, min: 1000ns, avg: 327129ns
+0013 -> beam max: 78673000ns, min: 1000ns, avg: 328734ns
+0050 -> beam max: 74786000ns, min: 1000ns, avg: 330164ns
+0035 -> beam max: 70077000ns, min: 1000ns, avg: 331571ns
+0042 -> beam max: 70233000ns, min: 1000ns, avg: 332447ns
+0005 -> beam max: 58996000ns, min: 1000ns, avg: 338054ns
+0018 -> beam max: 52040000ns, min: 1000ns, avg: 348793ns
+0063 -> beam max: 80578000ns, min: 1000ns, avg: 345681ns
+0036 -> beam max: 63245000ns, min: 1000ns, avg: 358292ns
+0025 -> beam max: 56849000ns, min: 1000ns, avg: 365402ns
+0052 -> beam max: 42510000ns, min: 1000ns, avg: 364365ns
+0012 -> beam max: 52832000ns, min: 1000ns, avg: 367025ns
+0026 -> beam max: 62216000ns, min: 1000ns, avg: 369150ns
+0045 -> beam max: 61750000ns, min: 1000ns, avg: 369556ns
+0053 -> beam max: 64838000ns, min: 1000ns, avg: 370691ns
+0038 -> beam max: 78348000ns, min: 1000ns, avg: 371801ns
+0027 -> beam max: 79121000ns, min: 1000ns, avg: 369952ns
+0008 -> beam max: 77941000ns, min: 1000ns, avg: 372970ns
+0039 -> beam max: 48542000ns, min: 1000ns, avg: 380258ns
+0028 -> beam max: 79157000ns, min: 1000ns, avg: 381541ns
+0009 -> beam max: 78774000ns, min: 1000ns, avg: 382098ns
+0047 -> beam max: 77872000ns, min: 1000ns, avg: 383130ns
+0014 -> beam max: 53064000ns, min: 1000ns, avg: 382105ns
+0055 -> beam max: 79360000ns, min: 1000ns, avg: 386027ns
+0040 -> beam max: 57412000ns, min: 1000ns, avg: 387206ns
+0048 -> beam max: 79294000ns, min: 1000ns, avg: 396267ns
+0010 -> beam max: 78064000ns, min: 1000ns, avg: 399178ns
+0015 -> beam max: 79136000ns, min: 1000ns, avg: 398747ns
+0056 -> beam max: 81343000ns, min: 1000ns, avg: 406022ns
+0020 -> beam max: 64068000ns, min: 1000ns, avg: 408491ns
+0030 -> beam max: 62313000ns, min: 1000ns, avg: 408345ns
+0031 -> beam max: 72794000ns, min: 1000ns, avg: 416310ns
+0057 -> beam max: 71864000ns, min: 2000ns, avg: 416954ns
+0029 -> beam max: 79829000ns, min: 1000ns, avg: 429810ns
+0058 -> beam max: 93100000ns, min: 1000ns, avg: 429776ns
+0016 -> beam max: 78470000ns, min: 1000ns, avg: 429907ns
+0017 -> beam max: 96690000ns, min: 1000ns, avg: 433033ns
+0002 -> beam max: 95657000ns, min: 1000ns, avg: 439057ns
+0001 -> beam max: 97827000ns, min: 1000ns, avg: 439447ns
+0032 -> beam max: 75267000ns, min: 1000ns, avg: 440222ns
+0062 -> beam max: 93535000ns, min: 1000ns, avg: 455461ns
+0022 -> beam max: 110249000ns, min: 1000ns, avg: 464425ns
+0021 -> beam max: 111001000ns, min: 1000ns, avg: 465489ns
+0011 -> see max: 118871000ns, min: 1000ns, avg: 488487ns
+0011 -> 1024/1024 succ/totl, speed: 2.09 B/s
+0064 -> see max: 122444000ns, min: 1000ns, avg: 499324ns
+0064 -> 1024/1024 succ/totl, speed: 2.04 B/s
+0003 -> see max: 120932000ns, min: 1000ns, avg: 502684ns
+0003 -> 1024/1024 succ/totl, speed: 2.03 B/s
+0019 -> see max: 121968000ns, min: 1000ns, avg: 506035ns
+0019 -> 1024/1024 succ/totl, speed: 2.02 B/s
+0044 -> see max: 92130000ns, min: 1000ns, avg: 511432ns
+0044 -> 1024/1024 succ/totl, speed: 2.00 B/s
+0049 -> see max: 60246000ns, min: 1000ns, avg: 513720ns
+0049 -> 1024/1024 succ/totl, speed: 1.99 B/s
+0034 -> see max: 105961000ns, min: 1000ns, avg: 516425ns
+0034 -> 1024/1024 succ/totl, speed: 1.97 B/s
+0024 -> see max: 62146000ns, min: 1000ns, avg: 517820ns
+0024 -> 1024/1024 succ/totl, speed: 1.97 B/s
+0033 -> see max: 116480000ns, min: 1000ns, avg: 532240ns
+0033 -> 1024/1024 succ/totl, speed: 1.92 B/s
+0004 -> see max: 80311000ns, min: 1000ns, avg: 533328ns
+0004 -> 1024/1024 succ/totl, speed: 1.91 B/s
+0050 -> see max: 99493000ns, min: 1000ns, avg: 534164ns
+0050 -> 1024/1024 succ/totl, speed: 1.91 B/s
+0041 -> see max: 67273000ns, min: 1000ns, avg: 537689ns
+0041 -> 1024/1024 succ/totl, speed: 1.90 B/s
+0023 -> see max: 112472000ns, min: 1000ns, avg: 541801ns
+0023 -> 1024/1024 succ/totl, speed: 1.88 B/s
+0010 -> see max: 98062000ns, min: 1000ns, avg: 540999ns
+0010 -> 1024/1024 succ/totl, speed: 1.89 B/s
+0035 -> see max: 92972000ns, min: 1000ns, avg: 550656ns
+0035 -> 1024/1024 succ/totl, speed: 1.86 B/s
+0042 -> see max: 95010000ns, min: 1000ns, avg: 551443ns
+0042 -> 1024/1024 succ/totl, speed: 1.85 B/s
+0059 -> beam max: 113021000ns, min: 1000ns, avg: 547960ns
+0060 -> beam max: 116116000ns, min: 1000ns, avg: 550689ns
+0005 -> see max: 80202000ns, min: 1000ns, avg: 559345ns
+0005 -> 1024/1024 succ/totl, speed: 1.83 B/s
+0061 -> beam max: 115454000ns, min: 1000ns, avg: 554614ns
+0020 -> see max: 79514000ns, min: 1000ns, avg: 556341ns
+0020 -> 1024/1024 succ/totl, speed: 1.83 B/s
+0051 -> see max: 111213000ns, min: 1000ns, avg: 563039ns
+0051 -> 1024/1024 succ/totl, speed: 1.81 B/s
+0018 -> see max: 70089000ns, min: 1000ns, avg: 562583ns
+0018 -> 1024/1024 succ/totl, speed: 1.81 B/s
+0030 -> see max: 75435000ns, min: 1000ns, avg: 557880ns
+0030 -> 1024/1024 succ/totl, speed: 1.83 B/s
+0063 -> see max: 100392000ns, min: 1000ns, avg: 558100ns
+0063 -> 1024/1024 succ/totl, speed: 1.83 B/s
+0016 -> see max: 83447000ns, min: 1000ns, avg: 566511ns
+0016 -> 1024/1024 succ/totl, speed: 1.80 B/s
+0062 -> see max: 97250000ns, min: 1000ns, avg: 561841ns
+0062 -> 1024/1024 succ/totl, speed: 1.82 B/s
+0036 -> see max: 66416000ns, min: 1000ns, avg: 572165ns
+0036 -> 1024/1024 succ/totl, speed: 1.78 B/s
+0006 -> see max: 102442000ns, min: 1000ns, avg: 576533ns
+0006 -> 1024/1024 succ/totl, speed: 1.77 B/s
+0021 -> see max: 111611000ns, min: 1000ns, avg: 566706ns
+0021 -> 1024/1024 succ/totl, speed: 1.80 B/s
+0025 -> see max: 85424000ns, min: 1000ns, avg: 579358ns
+0025 -> 1024/1024 succ/totl, speed: 1.76 B/s
+0052 -> see max: 58374000ns, min: 1000ns, avg: 579929ns
+0052 -> 1024/1024 succ/totl, speed: 1.76 B/s
+0037 -> see max: 71424000ns, min: 1000ns, avg: 581242ns
+0037 -> 1024/1024 succ/totl, speed: 1.76 B/s
+0012 -> see max: 80775000ns, min: 1000ns, avg: 581700ns
+0012 -> 1024/1024 succ/totl, speed: 1.76 B/s
+0007 -> see max: 86386000ns, min: 1000ns, avg: 583466ns
+0007 -> 1024/1024 succ/totl, speed: 1.75 B/s
+0026 -> see max: 100221000ns, min: 1000ns, avg: 585842ns
+0026 -> 1024/1024 succ/totl, speed: 1.74 B/s
+0043 -> see max: 66714000ns, min: 1000ns, avg: 593476ns
+0043 -> 1024/1024 succ/totl, speed: 1.72 B/s
+0045 -> see max: 89354000ns, min: 1000ns, avg: 596085ns
+0045 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0038 -> see max: 101756000ns, min: 1000ns, avg: 596207ns
+0038 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0055 -> see max: 111601000ns, min: 1000ns, avg: 595841ns
+0055 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0054 -> see max: 99047000ns, min: 1000ns, avg: 596304ns
+0054 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0029 -> see max: 84289000ns, min: 1000ns, avg: 595361ns
+0029 -> 1024/1024 succ/totl, speed: 1.72 B/s
+0048 -> see max: 107921000ns, min: 1000ns, avg: 595498ns
+0048 -> 1024/1024 succ/totl, speed: 1.72 B/s
+0015 -> see max: 92341000ns, min: 1000ns, avg: 595827ns
+0015 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0046 -> see max: 94828000ns, min: 1000ns, avg: 597403ns
+0046 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0008 -> see max: 76804000ns, min: 1000ns, avg: 598713ns
+0008 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0047 -> see max: 89142000ns, min: 1000ns, avg: 599315ns
+0047 -> 1024/1024 succ/totl, speed: 1.70 B/s
+0031 -> see max: 93005000ns, min: 1000ns, avg: 595987ns
+0031 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0057 -> see max: 89159000ns, min: 1000ns, avg: 596048ns
+0057 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0032 -> see max: 93038000ns, min: 1000ns, avg: 596549ns
+0032 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0013 -> see max: 68624000ns, min: 1000ns, avg: 601335ns
+0013 -> 1024/1024 succ/totl, speed: 1.70 B/s
+0009 -> see max: 80549000ns, min: 1000ns, avg: 601666ns
+0009 -> 1024/1024 succ/totl, speed: 1.70 B/s
+0058 -> see max: 111324000ns, min: 1000ns, avg: 599693ns
+0058 -> 1024/1024 succ/totl, speed: 1.70 B/s
+0028 -> see max: 76634000ns, min: 1000ns, avg: 602690ns
+0028 -> 1024/1024 succ/totl, speed: 1.69 B/s
+0027 -> see max: 63003000ns, min: 1000ns, avg: 603162ns
+0027 -> 1024/1024 succ/totl, speed: 1.69 B/s
+0014 -> see max: 67037000ns, min: 1000ns, avg: 603986ns
+0014 -> 1024/1024 succ/totl, speed: 1.69 B/s
+0059 -> see max: 113015000ns, min: 1000ns, avg: 601005ns
+0059 -> 1024/1024 succ/totl, speed: 1.70 B/s
+0017 -> see max: 115282000ns, min: 1000ns, avg: 605733ns
+0017 -> 1024/1024 succ/totl, speed: 1.69 B/s
+0040 -> see max: 75363000ns, min: 1000ns, avg: 605166ns
+0040 -> 1024/1024 succ/totl, speed: 1.69 B/s
+0060 -> see max: 115851000ns, min: 1000ns, avg: 602280ns
+0060 -> 1024/1024 succ/totl, speed: 1.70 B/s
+0039 -> see max: 63637000ns, min: 1000ns, avg: 604841ns
+0039 -> 1024/1024 succ/totl, speed: 1.69 B/s
+0002 -> see max: 113309000ns, min: 1000ns, avg: 608207ns
+0002 -> 1024/1024 succ/totl, speed: 1.68 B/s
+0001 -> see max: 114241000ns, min: 1000ns, avg: 608921ns
+0001 -> 1024/1024 succ/totl, speed: 1.68 B/s
+0022 -> see max: 110201000ns, min: 1000ns, avg: 598102ns
+0022 -> 1024/1024 succ/totl, speed: 1.71 B/s
+0053 -> see max: 102941000ns, min: 1000ns, avg: 609823ns
+0053 -> 1024/1024 succ/totl, speed: 1.68 B/s
+0061 -> see max: 115475000ns, min: 1000ns, avg: 706398ns
+0061 -> 1024/1024 succ/totl, speed: 1.45 B/s
+0056 -> see max: 388860000ns, min: 1000ns, avg: 914374ns
+0056 -> 1024/1024 succ/totl, speed: 1.12 B/s
 ^Csignal: interrupt
 ```

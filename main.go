@@ -66,7 +66,7 @@ func main() {
 			}
 		}
 		wg.Add(1)
-		ch := mr.Reflect(make([]byte, *l))
+		ch := mr.Reflect(int(*l))
 		go func() {
 			for err := range ch {
 				fmt.Println("ERROR:", err)
