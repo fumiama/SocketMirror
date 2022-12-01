@@ -22,7 +22,8 @@ func TestTcp(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	hash, bmerrch, bmmsgch := bm.Beam(1024, 1024)
+	startch := make(chan struct{})
+	hash, bmerrch, bmmsgch := bm.Beam(1024, 1024, startch)
 	go func() {
 		for err := range bmerrch {
 			t.Log(err)
@@ -43,6 +44,7 @@ func TestTcp(t *testing.T) {
 			t.Log(err)
 		}
 	}()
+	startch <- struct{}{}
 	sc, _, _, _, err := bm.See(1024, 1024, hash)
 	if err != nil {
 		t.Fatal(err)
@@ -60,7 +62,8 @@ func TestUdp(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	hash, bmerrch, bmmsgch := bm.Beam(1024, 1024)
+	startch := make(chan struct{})
+	hash, bmerrch, bmmsgch := bm.Beam(1024, 1024, startch)
 	go func() {
 		for err := range bmerrch {
 			t.Log(err)
@@ -81,6 +84,7 @@ func TestUdp(t *testing.T) {
 			t.Log(err)
 		}
 	}()
+	startch <- struct{}{}
 	sc, _, _, _, err := bm.See(1024, 1024, hash)
 	if err != nil {
 		t.Fatal(err)

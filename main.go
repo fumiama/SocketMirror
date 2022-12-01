@@ -96,7 +96,9 @@ func main() {
 				erroln(i, fmt.Sprintf("[%04d]", i), err)
 				os.Exit(line())
 			}
-			hash, ch, msg := bm.Beam(int(*l), int(*r))
+			defer bm.Close()
+			startch := make(chan struct{})
+			hash, ch, msg := bm.Beam(int(*l), int(*r), startch)
 			go func() {
 				for err := range ch {
 					erroln(i, fmt.Sprintf("[%04d]", i), err)
@@ -117,17 +119,24 @@ func main() {
 				}
 				infof(i, fmt.Sprintf("[%04d]", i), "beam max: %dns, min: %dns, avg: %dns\n", max, min, sum/int64(*l))
 			}()
-			t0 := time.Now().UnixMilli()
-			cnt, max, min, sum, err := bm.See(int(*l), int(*r), hash)
-			if err != nil {
-				erroln(i, fmt.Sprintf("[%04d]", i), err)
-			}
-			infof(i, fmt.Sprintf("[%04d]", i), "see max: %dns, min: %dns, avg: %dns\n", max, min, sum/int64(*l))
-			t1 := time.Now().UnixMilli()
-			totl := *l * *r
-			delta := t1 - t0
-			infof(i, fmt.Sprintf("[%04d]", i), "%d/%d succ/totl, speed: %0.2f B/s\n", cnt, *l, float64(totl)/float64(delta)/1000)
-			bm.Close()
+			wg := sync.WaitGroup{}
+			wg.Add(1)
+			go func() {
+				t0 := time.Now().UnixMilli()
+				cnt, max, min, sum, err := bm.See(int(*l), int(*r), hash)
+				if err != nil {
+					erroln(i, fmt.Sprintf("[%04d]", i), err)
+				}
+				infof(i, fmt.Sprintf("[%04d]", i), "see max: %dns, min: %dns, avg: %dns\n", max, min, sum/int64(*l))
+				t1 := time.Now().UnixMilli()
+				totl := *l * *r
+				delta := t1 - t0
+				infof(i, fmt.Sprintf("[%04d]", i), "%d/%d succ/totl, speed: %0.2f B/s\n", cnt, *l, float64(totl)/float64(delta)/1000)
+				wg.Done()
+			}()
+			startch <- struct{}{}
+			close(startch)
+			wg.Wait()
 		}
 		if *s {
 			for i := 0; i < int(*c); i++ {
@@ -150,6 +159,7 @@ func main() {
 				os.Exit(line())
 			}
 		}
+		defer mr.Close()
 		infoln(tm.WHITE, "[serv]", "start")
 		ch, msg := mr.Reflect(int(*l))
 		var (
@@ -171,7 +181,6 @@ func main() {
 				break lop
 			}
 		}
-		mr.Close()
 		infoln(tm.WHITE, "[serv]", "terminate")
 	}
 }

@@ -31,7 +31,7 @@ func (bm *Beamer) Connect(network string, timeout time.Duration) (err error) {
 // Beam send batchsize bytes random data by batchcount times
 //
 //go:nosplit
-func (bm *Beamer) Beam(batchsize, batchcount int) (uint64, <-chan error, <-chan int64) {
+func (bm *Beamer) Beam(batchsize, batchcount int, start <-chan struct{}) (uint64, <-chan error, <-chan int64) {
 	data := make([]byte, batchsize)
 	_, _ = rand.Read(data)
 	h := crc64.New(crc64.MakeTable(crc64.ISO))
@@ -42,6 +42,7 @@ func (bm *Beamer) Beam(batchsize, batchcount int) (uint64, <-chan error, <-chan 
 	go func() {
 		defer close(ch)
 		defer close(msg)
+		<-start
 		for batchcount > 0 {
 			var err error
 			cnt := 0
