@@ -42,6 +42,10 @@ func (bm *Beamer) Beam(batchsize, batchcount int, start <-chan struct{}) (uint64
 	go func() {
 		defer close(ch)
 		defer close(msg)
+		tcpconn, ok := bm.conn.(*net.TCPConn)
+		if ok {
+			defer tcpconn.CloseWrite()
+		}
 		<-start
 		for batchcount > 0 {
 			var err error
@@ -71,6 +75,10 @@ func (bm *Beamer) See(batchsize, batchcount int, hash uint64) (successcount int,
 	data := make([]byte, batchsize)
 	h := crc64.New(crc64.MakeTable(crc64.ISO))
 	min = int64(math.MaxInt64)
+	tcpconn, ok := bm.conn.(*net.TCPConn)
+	if ok {
+		defer tcpconn.CloseRead()
+	}
 	for batchcount > 0 {
 		t0 := time.Now().UnixNano()
 		_, err = io.ReadFull(bm.conn, data)
