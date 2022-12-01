@@ -68,7 +68,10 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 	mc := setupMainSignalHandler()
 	if *c > 0 {
-		cli := func(i int) {
+		cli := func(i int, w *sync.WaitGroup) {
+			if w != nil {
+				defer w.Done()
+			}
 			bm := client.NewBeamer(*addr)
 			err := bm.Connect(*n, time.Second*time.Duration(*t))
 			if err != nil {
@@ -119,13 +122,16 @@ func main() {
 		}
 		if *s {
 			for i := 0; i < int(*c); i++ {
-				go cli(i + 1)
+				go cli(i+1, nil)
 			}
 		} else {
-			for i := 0; i < int(*c); i++ {
-				go cli(i + 1)
+			wg := sync.WaitGroup{}
+			wg.Add(int(*c))
+			for i := 0; i < int(*c)-1; i++ {
+				go cli(i+1, &wg)
 			}
-			<-mc
+			cli(int(*c), &wg)
+			wg.Wait()
 			return
 		}
 	}
