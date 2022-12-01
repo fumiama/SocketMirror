@@ -110,7 +110,7 @@ func main() {
 				t1 := time.Now().UnixMilli()
 				totl := *l * *r
 				delta := t1 - t0
-				infof(i, fmt.Sprintf("[%04d]", i), "%d/%d succ/totl, speed: %0.2f B/s\n", cnt, *r, float64(totl)/float64(delta)/1000)
+				infof(i, fmt.Sprintf("[%04d]", i), "%d/%d succ/totl, speed: %0.2f KB/s\n", cnt, *r, float64(totl*1000)/float64(delta)/1024)
 				wg.Done()
 			}()
 			startch <- struct{}{}
