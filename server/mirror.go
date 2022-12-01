@@ -65,12 +65,16 @@ func (mr *Mirror) Reflect(bufsz int) (<-chan error, <-chan string) {
 					for {
 						n, err := conn.Read(buf)
 						if err != nil {
-							ch <- errors.Wrapf(err, "read from %v", conn.RemoteAddr())
+							if err != io.EOF {
+								ch <- errors.Wrapf(err, "read from %v", conn.RemoteAddr())
+							}
 							break
 						}
 						_, err = conn.Write(buf[:n])
 						if err != nil {
-							ch <- errors.Wrapf(err, "write to %v", conn.RemoteAddr())
+							if err != io.EOF {
+								ch <- errors.Wrapf(err, "write to %v", conn.RemoteAddr())
+							}
 							break
 						}
 					}
@@ -95,10 +99,9 @@ func (mr *Mirror) Reflect(bufsz int) (<-chan error, <-chan string) {
 		for {
 			n, addr, err := conn.ReadFrom(buf)
 			if err != nil {
-				ch <- err
+				ch <- errors.Wrapf(err, "read from %v", addr)
 				break
 			}
-			msg <- fmt.Sprintf("recv pkt from: %v", addr)
 			_, err = conn.WriteTo(buf[:n], addr)
 			if err != nil {
 				ch <- errors.Wrapf(err, "write to %v", addr)
