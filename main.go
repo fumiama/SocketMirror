@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"runtime"
 	"strings"
+	"sync"
 	"syscall"
 	"time"
 
@@ -33,15 +34,23 @@ func setupMainSignalHandler() <-chan os.Signal {
 	return mc
 }
 
+var pmu sync.Mutex
+
 func infoln(i int, title string, a ...any) {
+	pmu.Lock()
+	defer pmu.Unlock()
 	tm.Print(tm.Color("INFO ", tm.BLUE), tm.Color(title, i%8), " ", fmt.Sprintln(a...))
 	tm.Flush()
 }
 func erroln(i int, title string, a ...any) {
+	pmu.Lock()
+	defer pmu.Unlock()
 	tm.Print(tm.Color("ERRO ", tm.RED), tm.Color(title, i%8), " ", fmt.Sprintln(a...))
 	tm.Flush()
 }
 func infof(i int, title string, s string, a ...any) {
+	pmu.Lock()
+	defer pmu.Unlock()
 	tm.Print(tm.Color("INFO ", tm.BLUE), tm.Color(title, i%8), " ", fmt.Sprintf(s, a...))
 	tm.Flush()
 }
@@ -137,11 +146,11 @@ func main() {
 		if strings.Contains(*n, "tcp") {
 			err := mr.Listen(*n)
 			if err != nil {
-				erroln(tm.WHITE, "[srv]", err)
+				erroln(tm.WHITE, "[serv]", err)
 				os.Exit(line())
 			}
 		}
-		infoln(tm.WHITE, "[srv]", "start")
+		infoln(tm.WHITE, "[serv]", "start")
 		ch, msg := mr.Reflect(int(*l))
 		var (
 			err      error
@@ -152,9 +161,9 @@ func main() {
 		for {
 			select {
 			case err, ok1 = <-ch:
-				erroln(tm.WHITE, "[srv]", err)
+				erroln(tm.WHITE, "[serv]", err)
 			case str, ok2 = <-msg:
-				infoln(tm.WHITE, "[srv]", str)
+				infoln(tm.WHITE, "[serv]", str)
 			case <-mc:
 				break lop
 			}
@@ -163,6 +172,6 @@ func main() {
 			}
 		}
 		mr.Close()
-		infoln(tm.WHITE, "[srv]", "terminate")
+		infoln(tm.WHITE, "[serv]", "terminate")
 	}
 }
