@@ -32,6 +32,7 @@ func infoln(i int, title string, a ...any) {
 	setcolor(i & 0xff)
 	fmt.Print(title)
 	setcolor(BLUE | GREEN | RED)
+	fmt.Print(" ")
 	fmt.Println(a...)
 }
 func erroln(i int, title string, a ...any) {
@@ -42,6 +43,7 @@ func erroln(i int, title string, a ...any) {
 	setcolor(i & 0xff)
 	fmt.Print(title)
 	setcolor(BLUE | GREEN | RED)
+	fmt.Print(" ")
 	fmt.Println(a...)
 }
 func infof(i int, title string, s string, a ...any) {
@@ -52,6 +54,7 @@ func infof(i int, title string, s string, a ...any) {
 	setcolor(i & 0xff)
 	fmt.Print(title)
 	setcolor(BLUE | GREEN | RED)
+	fmt.Print(" ")
 	fmt.Printf(s, a...)
 }
 
