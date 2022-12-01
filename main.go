@@ -34,27 +34,6 @@ func setupMainSignalHandler() <-chan os.Signal {
 	return mc
 }
 
-var pmu sync.Mutex
-
-func infoln(i int, title string, a ...any) {
-	pmu.Lock()
-	defer pmu.Unlock()
-	tm.Print(tm.Color("INFO ", tm.BLUE), tm.Color(title, i%8), " ", fmt.Sprintln(a...))
-	tm.Flush()
-}
-func erroln(i int, title string, a ...any) {
-	pmu.Lock()
-	defer pmu.Unlock()
-	tm.Print(tm.Color("ERRO ", tm.RED), tm.Color(title, i%8), " ", fmt.Sprintln(a...))
-	tm.Flush()
-}
-func infof(i int, title string, s string, a ...any) {
-	pmu.Lock()
-	defer pmu.Unlock()
-	tm.Print(tm.Color("INFO ", tm.BLUE), tm.Color(title, i%8), " ", fmt.Sprintf(s, a...))
-	tm.Flush()
-}
-
 func main() {
 	n := flag.String("n", "tcp", "network")
 	addr := flag.String("a", "127.0.0.1:8888", "server addr")
