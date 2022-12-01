@@ -61,6 +61,10 @@ func main() {
 		fmt.Println("ERROR: zero batch size")
 		os.Exit(line())
 	}
+	if *l > 1024*1024*64 { // 64M
+		fmt.Println("ERROR: batch size too large")
+		os.Exit(line())
+	}
 	if *r == 0 {
 		fmt.Println("ERROR: zero batch count")
 		os.Exit(line())
