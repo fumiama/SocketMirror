@@ -90,11 +90,13 @@ func (mr *Mirror) Reflect(bufsz int) (<-chan error, <-chan string) {
 	go func() {
 		defer close(ch)
 		conn, err := net.ListenPacket("udp", mr.addr)
-		mr.conn = append(mr.conn, conn)
 		if err != nil {
 			ch <- err
 			return
 		}
+		mr.Lock()
+		mr.conn = append(mr.conn, conn)
+		mr.Unlock()
 		buf := make([]byte, bufsz)
 		for {
 			n, addr, err := conn.ReadFrom(buf)
