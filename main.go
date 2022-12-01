@@ -65,12 +65,28 @@ func main() {
 				os.Exit(line())
 			}
 		}
+		fmt.Println("[srv] start")
+		defer mr.Close()
 		wg.Add(1)
-		ch := mr.Reflect(int(*l))
+		ch, msg := mr.Reflect(int(*l))
 		go func() {
-			for err := range ch {
-				fmt.Println("ERROR:", err)
+			var (
+				err      error
+				str      string
+				ok1, ok2 bool
+			)
+			for {
+				select {
+				case err, ok1 = <-ch:
+					fmt.Println("[srv] ERROR:", err)
+				case str, ok2 = <-msg:
+					fmt.Println("[srv]", str)
+				}
+				if !ok1 && !ok2 {
+					break
+				}
 			}
+			fmt.Println("[srv] terminate")
 			wg.Done()
 		}()
 	}
@@ -81,13 +97,13 @@ func main() {
 				bm := client.NewBeamer(*addr)
 				err := bm.Connect(*n, time.Second*time.Duration(*t))
 				if err != nil {
-					fmt.Println("ERROR:", err)
+					fmt.Println("[cli] ERROR:", err)
 					os.Exit(line())
 				}
 				hash, ch, msg := bm.Beam(int(*l), int(*r))
 				go func() {
 					for err := range ch {
-						fmt.Println("ERROR:", err)
+						fmt.Println("[cli] ERROR:", err)
 					}
 				}()
 				go func() {
@@ -115,6 +131,7 @@ func main() {
 				totl := *l * *r
 				delta := t1 - t0
 				fmt.Printf("%04d -> %d/%d succ/totl, speed: %0.2f B/s\n", i, cnt, *l, float64(totl)/float64(delta)/1000)
+				bm.Close()
 				wg.Done()
 			}(i + 1)
 		}
